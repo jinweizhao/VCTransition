@@ -10,8 +10,4 @@ import UIKit
 
 class InteractiveTransition: NSObject {
     
-    enum type {
-        case a
-    }
-    
 }
