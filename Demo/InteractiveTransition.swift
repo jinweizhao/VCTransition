@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias GestureConfig = () -> ()
+typealias GestureConfig = () ->Void
 
 enum InteractiveDirection: Int {//手势的方向
     case Left
