@@ -9,8 +9,11 @@
 import UIKit
 
 
-class ModalController: UIViewController {
+class ModalController: UIViewController,UIViewControllerTransitioningDelegate {
     
+    var delegate: ModalControllerDelegate?
+    
+    var interactiveDismiss: InteractiveTransition?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,14 +24,43 @@ class ModalController: UIViewController {
         
         self.view.addSubview(view)
         
+        self.transitioningDelegate = self;
+        self.modalPresentationStyle = .custom
+        
+        interactiveDismiss = InteractiveTransition.init(WithTransitionType: .Dismiss, gestureDirection: .Down)
+        
+        interactiveDismiss?.addGestureForViewController(vc: self)
+        
     }
 
     @IBAction func dismiss(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomTransition.transitionWith(transitionType: .TransitionTypePresent)
+    }
+    
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomTransition.transitionWith(transitionType: .TransitionTypeDismiss)
+    }
+    
+    
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return self.delegate?.interactiveTransitionPresented()
+    }
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactiveDismiss
+    }
+    
+    
+    
 }
 
-
+protocol ModalControllerDelegate {
+    func interactiveTransitionPresented() -> InteractiveTransition?
+}
 
 
 

@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
+class ViewController: UIViewController, UIViewControllerTransitioningDelegate,ModalControllerDelegate {
 
     var customTransition: CustomTransition?
     
     var interactivePresent: InteractiveTransition?
+    
     
     @IBOutlet weak var nextBtn: UIButton!
     
@@ -27,6 +28,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         
         interactivePresent?.addGestureForViewController(vc: self)
         
+        self.transitioningDelegate = self;
+
         
     }
     
@@ -35,7 +38,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         
         let vc = ModalController()
         
-        vc.transitioningDelegate = self
+        vc.delegate = self
         
         self.present(vc, animated: true, completion: nil)
         
@@ -53,11 +56,18 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CustomTransition.transitionWith(transitionType: .TransitionTypeDismiss)
     }
+    
     //执行 present 的时候的手势
     func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactivePresent
     }
     
+    
+    func interactiveTransitionPresented() -> InteractiveTransition? {
+        return interactivePresent
+    }
+    
+
 
 }
 

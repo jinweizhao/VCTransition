@@ -78,7 +78,7 @@ class InteractiveTransition: UIPercentDrivenInteractiveTransition {
             let transitionX = gesture.translation(in: gesture.view).y
             percent = transitionX / (gesture.view?.frame.size.width)!
         }
-        
+        print(percent)
         switch gesture.state {
         case .began:
             //手势开始的时候标记手势状态，并开始相应的事件
