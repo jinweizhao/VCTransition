@@ -44,7 +44,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     
     
-    
+    //present 的动画
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CustomTransition.transitionWith(transitionType: .TransitionTypePresent)
     }
@@ -53,11 +53,10 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return CustomTransition.transitionWith(transitionType: .TransitionTypeDismiss)
     }
-    
-    
-//    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-//        InteractiveTransition.init(WithTransitionType: .Present, gestureDirection: .Up)
-//    }
+    //执行 present 的时候的手势
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactivePresent
+    }
     
 
 }

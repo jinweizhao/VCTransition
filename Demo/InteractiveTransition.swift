@@ -67,16 +67,16 @@ class InteractiveTransition: UIPercentDrivenInteractiveTransition {
         switch interactiveDirection! {
         case .Left:
             let transitionX = -gesture.translation(in: gesture.view).x
-            percent = transitionX
+            percent = transitionX / (gesture.view?.frame.size.width)!
         case .Right:
             let transitionX = gesture.translation(in: gesture.view).x
-            percent = transitionX
+            percent = transitionX / (gesture.view?.frame.size.width)!
         case .Up:
             let transitionX = -gesture.translation(in: gesture.view).y
-            percent = transitionX
+            percent = transitionX / (gesture.view?.frame.size.width)!
         case .Down:
             let transitionX = gesture.translation(in: gesture.view).y
-            percent = transitionX
+            percent = transitionX / (gesture.view?.frame.size.width)!
         }
         
         switch gesture.state {
