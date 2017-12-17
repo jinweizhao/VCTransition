@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIViewControllerTransitioningDelegate,ModalControllerDelegate {
+class ViewController: UIViewController, UIViewControllerTransitioningDelegate,ModalControllerDelegate,UINavigationControllerDelegate {
 
     var customTransition: CustomTransition?
     
